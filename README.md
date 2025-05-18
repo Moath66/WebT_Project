@@ -4,6 +4,14 @@ A clean and responsive front-end web application built with Vue.js to help users
 
 ---
 
+## 📚 Course Information
+
+- **Course Code**: SECJ3483-03  
+- **Course Name**: Teknologi Web (Web Technology)  
+- **Lecturer**: Dr. Muhammad Khatibsyarbini
+
+---
+
 ## 👨‍💻 Project Title  
 **Personal Finance Tracker – Vue.js Front-End Application**
 
@@ -21,7 +29,9 @@ A clean and responsive front-end web application built with Vue.js to help users
 
 ---
 
-## ⚙️ Setup Instructions
+##  Project details
+
+⚙ Setup Instructions:
 
 To run this project locally:
 
@@ -32,20 +42,20 @@ npm install
 # Start the development server
 npm run serve
 
+# Build for production (optional)
+npm run build
+
+🌟 Features:
+
+📊 Dashboard with income, expense, and balance summary cards  
+🍩 Spending breakdown chart using Chart.js (doughnut)  
+📈 Monthly spending trend chart (bar)  
+📝 Form to add and update transactions  
+💾 Local data handling (mock state)  
+🎨 Responsive SCSS styling with clean UI/UX  
 
 
-##🌟 Features
-📊 Dashboard with income, expense, and balance cards
+🔗 Useful Links
+Vue CLI Documentation
 
-🍩 Spending breakdown chart using Chart.js (doughnut)
-
-📈 Monthly spending trend chart (bar)
-
-📝 Form to add and update transactions
-
-💾 Local data handling (mock state)
-
-🎨 SCSS styling for responsive and modern UI
-
-
-## 🔗 Useful Links
+Chart.js Docs
