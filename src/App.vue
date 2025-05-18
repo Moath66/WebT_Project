@@ -1,11 +1,13 @@
-// Developed and connected all components, handled data flow between dashboard and form - Abdulrahman Daney
+<!-- Developed and connected all components, handled data flow between dashboard and form - Moath Morsy -->
 
 <template>
-  <nav>
-    <router-link to="/">Dashboard</router-link> |
-    <router-link to="/update">Add Transaction</router-link>
-  </nav>
-  <router-view />
+  <div id="app">
+    <nav>
+      <router-link to="/">📊 Dashboard</router-link>
+      <router-link to="/update">➕ Add Transaction</router-link>
+    </nav>
+    <router-view />
+  </div>
 </template>
 
 <style lang="scss">
@@ -14,18 +16,31 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  background-color: #121d2b;
+  min-height: 100vh;
+  color: #ffffff;
 }
 
 nav {
-  padding: 30px;
+  background-color: #1f2a40;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #42b983;
 
   a {
     font-weight: bold;
-    color: #2c3e50;
+    color: #ffffff;
+    margin: 0 15px;
+    text-decoration: none;
 
     &.router-link-exact-active {
       color: #42b983;
+      border-bottom: 2px solid #42b983;
+      padding-bottom: 4px;
+    }
+
+    &:hover {
+      color: #7ee2b6;
     }
   }
 }
