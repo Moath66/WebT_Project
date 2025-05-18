@@ -32,7 +32,9 @@ npm install
 # Start the development server
 npm run serve
 
-🌟 Features
+
+
+##🌟 Features
 📊 Dashboard with income, expense, and balance cards
 
 🍩 Spending breakdown chart using Chart.js (doughnut)
@@ -46,4 +48,4 @@ npm run serve
 🎨 SCSS styling for responsive and modern UI
 
 
-🔗 Useful Links
+## 🔗 Useful Links
