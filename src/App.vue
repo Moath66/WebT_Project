@@ -1,47 +1,118 @@
-<!-- Developed and connected all components, handled data flow between dashboard and form - Moath Morsy -->
-
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/">📊 Dashboard</router-link>
-      <router-link to="/update">➕ Add Transaction</router-link>
-    </nav>
-    <router-view />
+  <div id="app-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <h2>💰 Finance App</h2>
+
+      <router-link to="/" class="nav-btn"> 📊 Dashboard </router-link>
+
+      <router-link to="/update" class="nav-btn purple">
+        ➕ Add Transaction
+      </router-link>
+
+      <button class="clear-btn" @click="clearTransactions">
+        🗑️ Clear All Data
+      </button>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <router-view />
+    </main>
   </div>
 </template>
 
+<script>
+export default {
+  methods: {
+    clearTransactions() {
+      if (confirm("Are you sure you want to clear all transactions?")) {
+        localStorage.removeItem("transactions");
+        location.reload();
+      }
+    },
+  },
+};
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  background-color: #121d2b;
+#app-layout {
+  display: flex;
   min-height: 100vh;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  background-color: #121d2b;
   color: #ffffff;
 }
 
-nav {
+/* Sidebar Styles */
+.sidebar {
+  width: 220px;
   background-color: #1f2a40;
-  padding: 20px;
+  padding: 20px 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-right: 2px solid #42b983;
+}
+
+.sidebar h2 {
   margin-bottom: 20px;
-  border-bottom: 2px solid #42b983;
+  font-size: 20px;
+  color: #42b983;
+}
 
-  a {
-    font-weight: bold;
-    color: #ffffff;
-    margin: 0 15px;
-    text-decoration: none;
+/* Reusable Sidebar Button Style */
+.nav-btn {
+  display: block;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  background-color: #2d3e50;
+  border-radius: 5px;
+  color: #42b983;
+  text-decoration: none;
+  transition: all 0.3s;
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-      border-bottom: 2px solid #42b983;
-      padding-bottom: 4px;
-    }
+.nav-btn:hover {
+  background-color: #364f6b;
+  color: #7ee2b6;
+}
 
-    &:hover {
-      color: #7ee2b6;
-    }
-  }
+.nav-btn.router-link-exact-active {
+  background-color: #42b983;
+  color: white;
+}
+
+/* Add Transaction in different color (optional) */
+.nav-btn.purple {
+  color: #b388ff;
+}
+
+.nav-btn.purple:hover {
+  color: #d6b3ff;
+}
+
+/* Red Clear Button */
+.clear-btn {
+  margin-top: 480px;
+  padding: 10px;
+  background: #ff4d4f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.clear-btn:hover {
+  background-color: #ff7875;
+}
+
+/* Main content area */
+.main-content {
+  flex: 1;
+  padding: 30px;
 }
 </style>

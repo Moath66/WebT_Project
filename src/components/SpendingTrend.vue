@@ -1,4 +1,4 @@
-<!-- Contributed by Zuhayer: Monthly Spending Bar Chart -->
+<!-- Contributed by Zuhayer: Monthly Spending Trend Bar Chart -->
 <template>
   <div class="chart-container">
     <h4>📈 Monthly Spending Trend</h4>
@@ -9,6 +9,7 @@
 <script>
 import {
   Chart,
+  BarController,
   BarElement,
   CategoryScale,
   LinearScale,
@@ -16,40 +17,68 @@ import {
   Legend,
 } from "chart.js";
 
-Chart.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
+Chart.register(
+  BarController,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend
+);
 
 export default {
   name: "SpendingTrend",
   props: ["monthlyData"],
-  mounted() {
-    new Chart(this.$refs.barChart, {
-      type: "bar",
-      data: {
-        labels: Object.keys(this.monthlyData),
-        datasets: [
-          {
-            label: "Expenses (RM)",
-            data: Object.values(this.monthlyData),
-            backgroundColor: "#42b983",
-            borderRadius: 6,
+  data() {
+    return {
+      chartInstance: null,
+    };
+  },
+  watch: {
+    monthlyData: {
+      immediate: true,
+      handler(newData) {
+        if (!newData || Object.keys(newData).length === 0) return;
+
+        if (this.chartInstance) {
+          this.chartInstance.destroy();
+        }
+
+        this.chartInstance = new Chart(this.$refs.barChart, {
+          type: "bar",
+          data: {
+            labels: Object.keys(newData),
+            datasets: [
+              {
+                label: "Expenses (RM)",
+                data: Object.values(newData),
+                backgroundColor: "#42b983",
+                borderRadius: 8,
+              },
+            ],
           },
-        ],
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: true, position: "bottom" },
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: {
-              callback: (value) => `RM ${value}`,
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: "bottom",
+                labels: { color: "#ffffff" },
+              },
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                ticks: { color: "#ccc", callback: (val) => `RM ${val}` },
+              },
+              x: {
+                ticks: { color: "#ccc" },
+              },
             },
           },
-        },
+        });
       },
-    });
+    },
   },
 };
 </script>
@@ -59,10 +88,17 @@ export default {
   background: #1f2a40;
   padding: 20px;
   border-radius: 12px;
-  margin: 1rem 0;
-  color: #fff;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.chart-container h4 {
+  margin-bottom: 15px;
+  text-align: center;
 }
 canvas {
-  max-width: 100%;
+  width: 100% !important;
+  height: 200px !important;
 }
 </style>

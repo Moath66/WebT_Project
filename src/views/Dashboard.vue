@@ -1,23 +1,26 @@
-<!-- Developed and connected all components, handled data flow between dashboard and form - Moath Morsy -->
+<!-- Contributed by Moath Morsy – Final UI-integrated Dashboard.vue -->
 <template>
-  <div class="dashboard">
-    <h2>📊 Personal Finance Dashboard</h2>
+  <div class="app-layout">
+    <!-- Main Dashboard Area -->
+    <main class="dashboard">
+      <h2>📊 Personal Finance Dashboard</h2>
 
-    <!-- Summary Cards -->
-    <div class="cards">
-      <SummaryCard title="Income" :amount="totalIncome" />
-      <SummaryCard title="Expenses" :amount="totalExpenses" />
-      <SummaryCard title="Balance" :amount="totalIncome - totalExpenses" />
-    </div>
+      <!-- Summary Cards -->
+      <div class="cards">
+        <SummaryCard title="Income" :amount="totalIncome" />
+        <SummaryCard title="Expenses" :amount="totalExpenses" />
+        <SummaryCard title="Balance" :amount="totalIncome - totalExpenses" />
+      </div>
 
-    <!-- Charts Section -->
-    <div class="charts">
-      <SpendingChart :data="categoryTotals" />
-      <SpendingTrend :monthlyData="monthlyExpenses" />
-    </div>
+      <!-- Charts Section -->
+      <div class="charts">
+        <SpendingChart :data="categoryTotals" />
+        <SpendingTrend :monthlyData="monthlyExpenses" />
+      </div>
 
-    <!-- Recent Transactions -->
-    <TransactionList :transactions="transactions" />
+      <!-- Recent Transactions -->
+      <TransactionList :transactions="transactions" />
+    </main>
   </div>
 </template>
 
@@ -74,18 +77,82 @@ export default {
     },
   },
   mounted() {
-    const stored = localStorage.getItem("transactions");
-    this.transactions = stored ? JSON.parse(stored) : [];
+    this.loadTransactions();
+  },
+  methods: {
+    loadTransactions() {
+      const stored = localStorage.getItem("transactions");
+      this.transactions = stored ? JSON.parse(stored) : [];
+    },
+    clearTransactions() {
+      if (confirm("Are you sure you want to delete all transactions?")) {
+        localStorage.removeItem("transactions");
+        this.loadTransactions();
+      }
+    },
   },
 };
 </script>
 
 <style scoped>
-.dashboard {
-  padding: 30px;
+.app-layout {
+  display: flex;
+  min-height: 100vh;
   background-color: #121d2b;
   color: #fff;
-  min-height: 100vh;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background-color: #1f2a40;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border-right: 2px solid #42b983;
+}
+
+.sidebar .logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #42b983;
+  margin-bottom: 30px;
+}
+
+.sidebar a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.sidebar a.router-link-exact-active {
+  color: #42b983;
+}
+
+.sidebar button {
+  background: transparent;
+  color: #f56c6c;
+  border: 1px solid #f56c6c;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.sidebar button:hover {
+  background-color: #f56c6c;
+  color: #fff;
+}
+
+/* Main dashboard area */
+.dashboard {
+  flex: 1;
+  padding: 30px;
+  background-color: #121d2b;
 }
 
 .cards {

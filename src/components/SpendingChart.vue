@@ -20,37 +20,59 @@ Chart.register(DoughnutController, ArcElement, Tooltip, Legend);
 export default {
   name: "SpendingChart",
   props: ["data"],
-  mounted() {
-    new Chart(this.$refs.chart, {
-      type: "doughnut",
-      data: {
-        labels: Object.keys(this.data),
-        datasets: [
-          {
-            data: Object.values(this.data),
-            backgroundColor: [
-              "#f87979",
-              "#7db9e8",
-              "#88d498",
-              "#f7c59f",
-              "#ffa07a",
+  data() {
+    return {
+      chartInstance: null,
+    };
+  },
+  watch: {
+    data: {
+      immediate: true,
+      handler(newData) {
+        if (!newData || Object.keys(newData).length === 0) return;
+
+        // Destroy previous instance
+        if (this.chartInstance) {
+          this.chartInstance.destroy();
+        }
+
+        // Create new chart
+        this.chartInstance = new Chart(this.$refs.chart, {
+          type: "doughnut",
+          data: {
+            labels: Object.keys(newData),
+            datasets: [
+              {
+                data: Object.values(newData),
+                backgroundColor: [
+                  "#f94144",
+                  "#f3722c",
+                  "#f9c74f",
+                  "#90be6d",
+                  "#577590",
+                ],
+                borderWidth: 2,
+                borderColor: "#1f2a40",
+              },
             ],
-            borderWidth: 2,
           },
-        ],
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: "bottom",
-            labels: {
-              color: "#fff",
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: "bottom",
+                labels: {
+                  color: "#ffffff",
+                  padding: 15,
+                  boxWidth: 20,
+                },
+              },
             },
           },
-        },
+        });
       },
-    });
+    },
   },
 };
 </script>
@@ -60,10 +82,20 @@ export default {
   background: #1f2a40;
   padding: 20px;
   border-radius: 12px;
-  margin: 1rem 0;
-  color: #fff;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
+
+.chart-container h4 {
+  margin-bottom: 15px;
+  text-align: center;
+  color: #ffffff;
+}
+
 canvas {
-  max-width: 100%;
+  width: 100% !important;
+  height: 200px !important;
 }
 </style>
