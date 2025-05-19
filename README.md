@@ -57,9 +57,10 @@ npm run build
 
 ## 📸 Demo Screenshots
 
-![Dashboard](screenshots/dashboard.png)
-![Transaction Form](screenshots/add-form.png)
-![Charts View](screenshots/charts.png)
+![Dashboard](./screenshots/dashboard.png)
+![Transaction Form](./screenshots/add-form.png)
+![Charts View](./screenshots/charts.png)
+
 
 
 
