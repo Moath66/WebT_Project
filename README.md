@@ -57,14 +57,15 @@ npm run build
 
 ## 📸 Demo Screenshots
 
-### 📊 Dashboard View
+### 📊 Dashboard View  
 ![Dashboard](https://raw.githubusercontent.com/Moath66/WebT_Project/main/screenshots/dashboard.png)
 
-### ➕ Add Transaction Form
+### ➕ Add Transaction Form  
 ![Add Form](https://raw.githubusercontent.com/Moath66/WebT_Project/main/screenshots/add-form.png)
 
-### 📈 Charts Section
-![Charts](https://raw.githubusercontent.com/Moath66/WebT_Project/refs/heads/main/screenshots/charts.png)
+### 📈 Charts Section  
+![Charts](https://raw.githubusercontent.com/Moath66/WebT_Project/main/screenshots/charts.png)
+
 
 
 
