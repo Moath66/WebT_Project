@@ -58,13 +58,14 @@ npm run build
 ## 📸 Demo Screenshots
 
 ### 📊 Dashboard View
-![Dashboard](./screenshots/dashboard.png)
+![Dashboard](screenshots/dashboard.png)
 
 ### ➕ Add Transaction Form
-![Add Form](./screenshots/add-form.png)
+![Add Form](screenshots/add-form.png)
 
 ### 📈 Charts Section
-![Charts](./screenshots/charts.png)
+![Charts](screenshots/charts.png)
+
 
 
 
