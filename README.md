@@ -64,8 +64,7 @@ npm run build
 ![Add Form](https://raw.githubusercontent.com/Moath66/WebT_Project/main/screenshots/add-form.png)
 
 ### 📈 Charts Section
-![Charts](https://raw.githubusercontent.com/Moath66/WebT_Project/main/screenshots/charts.png)
-
+![Charts](https://raw.githubusercontent.com/Moath66/WebT_Project/refs/heads/main/screenshots/charts.png)
 
 
 
