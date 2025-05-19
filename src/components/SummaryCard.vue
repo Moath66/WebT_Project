@@ -1,4 +1,4 @@
-<!-- SummaryCard.vue - Contributed by Mohamed Aiman -->
+<!-- SummaryCard.vue - Contributed by Mohammed Salghi -->
 <template>
   <div class="summary-card" :class="type">
     <h3>{{ title }}</h3>
