@@ -29,21 +29,16 @@ A clean and responsive front-end web application built with Vue.js to help users
 
 ---
 
-##  Project details
+## 📸 Demo Screenshots
 
-⚙ Setup Instructions:
+### 📊 Dashboard View  
+![Dashboard](https://raw.githubusercontent.com/Moath66/WebT_Project/main/screenshots/dashboard.png)
 
-To run this project locally:
+### ➕ Add Transaction Form  
+![Add Form](https://raw.githubusercontent.com/Moath66/WebT_Project/main/screenshots/add-form.png)
 
-```bash
-# Install project dependencies
-npm install
-
-# Start the development server
-npm run serve
-
-# Build for production (optional)
-npm run build
+### 📈 Charts Section  
+![Charts](https://raw.githubusercontent.com/Moath66/WebT_Project/main/screenshots/charts.png)
 
 🌟 Features:
 
@@ -55,16 +50,7 @@ npm run build
 🎨 Responsive SCSS styling with clean UI/UX  
 
 
-## 📸 Demo Screenshots
 
-### 📊 Dashboard View  
-![Dashboard](https://raw.githubusercontent.com/Moath66/WebT_Project/main/screenshots/dashboard.png)
-
-### ➕ Add Transaction Form  
-![Add Form](https://raw.githubusercontent.com/Moath66/WebT_Project/main/screenshots/add-form.png)
-
-### 📈 Charts Section  
-![Charts](https://raw.githubusercontent.com/Moath66/WebT_Project/main/screenshots/charts.png)
 
 
 
