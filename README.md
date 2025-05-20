@@ -50,7 +50,19 @@ A clean and responsive front-end web application built with Vue.js to help users
 🎨 Responsive SCSS styling with clean UI/UX  
 
 
+⚙ Setup Instructions:
 
+To run this project locally:
+
+```bash
+# Install project dependencies
+npm install
+
+# Start the development server
+npm run serve
+
+# Build for production (optional)
+npm run build
 
 
 
