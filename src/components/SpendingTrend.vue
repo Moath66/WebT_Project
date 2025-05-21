@@ -1,5 +1,6 @@
 <!-- Contributed by Zuhayer: Monthly Spending Trend Bar Chart -->
 <template>
+  <!-- Chart container with a heading and canvas for rendering the bar chart -->
   <div class="chart-container">
     <h4>📈 Monthly Spending Trend</h4>
     <canvas ref="barChart"></canvas>
@@ -17,6 +18,7 @@ import {
   Legend,
 } from "chart.js";
 
+// Register necessary Chart.js components
 Chart.register(
   BarController,
   BarElement,
@@ -28,51 +30,58 @@ Chart.register(
 
 export default {
   name: "SpendingTrend",
-  props: ["monthlyData"],
+  props: ["monthlyData"], // Accepts the monthlyData prop for rendering the chart
   data() {
     return {
-      chartInstance: null,
+      chartInstance: null, // Holds reference to the Chart.js instance
     };
   },
   watch: {
+    // Watcher to detect changes in monthlyData and update the chart accordingly
     monthlyData: {
-      immediate: true,
+      immediate: true, // Run handler immediately on component mount
       handler(newData) {
+        // Exit early if newData is empty or undefined
         if (!newData || Object.keys(newData).length === 0) return;
 
+        // Destroy existing chart instance to prevent duplicates
         if (this.chartInstance) {
           this.chartInstance.destroy();
         }
 
+        // Create a new Chart.js bar chart instance with updated data
         this.chartInstance = new Chart(this.$refs.barChart, {
           type: "bar",
           data: {
-            labels: Object.keys(newData),
+            labels: Object.keys(newData), // Set X-axis labels from data keys (e.g., months)
             datasets: [
               {
-                label: "Expenses (RM)",
-                data: Object.values(newData),
-                backgroundColor: "#42b983",
-                borderRadius: 8,
+                label: "Expenses (RM)", // Dataset label
+                data: Object.values(newData), // Set Y-axis values from data values
+                backgroundColor: "#42b983", // Set bar color
+                borderRadius: 8, // Rounded corners for bars
               },
             ],
           },
           options: {
-            responsive: true,
-            maintainAspectRatio: false,
+            responsive: true, // Make chart responsive
+            maintainAspectRatio: false, // Allow flexible height/width
             plugins: {
               legend: {
-                position: "bottom",
-                labels: { color: "#ffffff" },
+                position: "bottom", // Place legend at the bottom
+                labels: { color: "#ffffff" }, // Set legend text color
               },
             },
             scales: {
               y: {
-                beginAtZero: true,
-                ticks: { color: "#ccc", callback: (val) => `RM ${val}` },
+                beginAtZero: true, // Start Y-axis from zero
+                ticks: {
+                  color: "#ccc", // Set Y-axis tick color
+                  callback: (val) => `RM ${val}`, // Format Y-axis tick labels with currency
+                },
               },
               x: {
-                ticks: { color: "#ccc" },
+                ticks: { color: "#ccc" }, // Set X-axis tick color
               },
             },
           },
