@@ -69,7 +69,3 @@ npm run build
 
 
 
-🔗 Useful Links
-Vue CLI Documentation
-
-Chart.js Docs
