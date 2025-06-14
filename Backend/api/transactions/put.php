@@ -36,7 +36,8 @@ try {
               SET date = :date, 
                   category = :category, 
                   type = :type, 
-                  amount = :amount 
+                  amount = :amount,
+                  note = :note
               WHERE id = :id";
               
     $stmt = $db->prepare($query);
@@ -47,6 +48,7 @@ try {
     $stmt->bindParam(":category", $data->category);
     $stmt->bindParam(":type", $data->type);
     $stmt->bindParam(":amount", $data->amount);
+    $stmt->bindParam(":note", $data->note);
     
     if($stmt->execute()) {
         http_response_code(200);

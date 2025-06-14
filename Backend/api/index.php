@@ -40,8 +40,12 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
     
     case 'DELETE':
-        if ($resource === 'transactions' && $id) {
-            require_once 'transactions/delete.php';
+        if ($resource === 'transactions') {
+            if ($id === 'all') {
+                require_once 'transactions/delete_all.php';
+            } else if ($id) {
+                require_once 'transactions/delete.php';
+            }
         }
         break;
     

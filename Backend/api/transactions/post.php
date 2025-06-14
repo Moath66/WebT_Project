@@ -20,7 +20,7 @@ try {
     $database = new Database();
     $db = $database->getConnection();
     
-    $query = "INSERT INTO transactions (date, category, type, amount) VALUES (:date, :category, :type, :amount)";
+    $query = "INSERT INTO transactions (date, category, type, amount, note) VALUES (:date, :category, :type, :amount, :note)";
     $stmt = $db->prepare($query);
     
     // Sanitize and bind data
@@ -28,6 +28,7 @@ try {
     $stmt->bindParam(":category", $data->category);
     $stmt->bindParam(":type", $data->type);
     $stmt->bindParam(":amount", $data->amount);
+    $stmt->bindParam(":note", $data->note);
     
     if($stmt->execute()) {
         http_response_code(201);
