@@ -15,9 +15,32 @@
 </template>
 
 <script>
+import { getTransactions, addTransaction, updateTransaction, deleteTransaction } from "@/services/transactionService";
+
 export default {
   name: "TransactionList",
-  props: ["transactions"],
+  data() {
+    return {
+      transactions: [],
+    };
+  },
+  async created() {
+    this.transactions = await getTransactions();
+  },
+  methods: {
+    async addNewTransaction(newTx) {
+      await addTransaction(newTx);
+      this.transactions = await getTransactions();
+    },
+    async editTransaction(id, updatedTx) {
+      await updateTransaction(id, updatedTx);
+      this.transactions = await getTransactions();
+    },
+    async removeTransaction(id) {
+      await deleteTransaction(id);
+      this.transactions = await getTransactions();
+    },
+  },
 };
 </script>
 
