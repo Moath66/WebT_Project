@@ -19,12 +19,16 @@
       </div>
 
       <!-- Recent Transactions -->
-      <TransactionList :transactions="transactions" />
+      <TransactionList
+        :transactions="transactions"
+        @refresh="fetchTransactions"
+      />
     </main>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 import SummaryCard from "@/components/SummaryCard.vue";
 import SpendingChart from "@/components/SpendingChart.vue";
 import SpendingTrend from "@/components/SpendingTrend.vue";
@@ -47,19 +51,19 @@ export default {
     totalIncome() {
       return this.transactions
         .filter((t) => t.type === "income")
-        .reduce((sum, t) => sum + t.amount, 0);
+        .reduce((sum, t) => sum + Number(t.amount), 0);
     },
     totalExpenses() {
       return this.transactions
         .filter((t) => t.type === "expense")
-        .reduce((sum, t) => sum + t.amount, 0);
+        .reduce((sum, t) => sum + Number(t.amount), 0);
     },
     categoryTotals() {
       const result = {};
       this.transactions
         .filter((t) => t.type === "expense")
         .forEach((t) => {
-          result[t.category] = (result[t.category] || 0) + t.amount;
+          result[t.category] = (result[t.category] || 0) + Number(t.amount);
         });
       return result;
     },
@@ -68,26 +72,32 @@ export default {
       this.transactions
         .filter((t) => t.type === "expense")
         .forEach((t) => {
-          const month = new Date(t.date).toLocaleString("default", {
+          const date = new Date(t.date);
+          const month = date.toLocaleString("default", {
             month: "short",
+            year: "numeric",
           });
-          result[month] = (result[month] || 0) + t.amount;
+          result[month] = (result[month] || 0) + Number(t.amount);
         });
       return result;
     },
   },
   mounted() {
-    this.loadTransactions();
+    this.fetchTransactions();
   },
   methods: {
-    loadTransactions() {
-      const stored = localStorage.getItem("transactions");
-      this.transactions = stored ? JSON.parse(stored) : [];
-    },
-    clearTransactions() {
-      if (confirm("Are you sure you want to delete all transactions?")) {
-        localStorage.removeItem("transactions");
-        this.loadTransactions();
+    async fetchTransactions() {
+      try {
+        const res = await axios.get(
+          "http://localhost:8085/personal-finance-tracker_CODE1/finance-backend/api/transactions/get.php"
+        );
+        if (res.data.success) {
+          this.transactions = res.data.data;
+        } else {
+          console.error("API returned failure:", res.data.message);
+        }
+      } catch (err) {
+        console.error("Failed to fetch transactions:", err);
       }
     },
   },

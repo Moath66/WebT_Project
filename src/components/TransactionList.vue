@@ -2,22 +2,48 @@
 <template>
   <div class="transaction-list">
     <h4>🧾 Recent Transactions</h4>
-    <ul>
+    <ul v-if="transactions.length">
       <li v-for="t in transactions" :key="t.id">
         <span class="date">{{ t.date }}</span>
         <span class="category">{{ t.category }}</span>
         <span :class="t.type">
-          {{ t.type === "income" ? "+" : "-" }}RM {{ t.amount.toFixed(2) }}
+          {{ t.type === "income" ? "+" : "-" }}RM
+          {{ parseFloat(t.amount).toFixed(2) }}
         </span>
+        <div class="actions">
+          <router-link :to="`/update/${t.id}`">✏️ Edit</router-link>
+          <button @click="deleteTransaction(t.id)" class="delete-btn">
+            🗑️
+          </button>
+        </div>
       </li>
     </ul>
+    <p v-else>No transactions available.</p>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "TransactionList",
   props: ["transactions"],
+  emits: ["refresh"],
+  methods: {
+    async deleteTransaction(id) {
+      if (confirm("Are you sure you want to delete this transaction?")) {
+        try {
+          await axios.delete(
+            "http://localhost:8085/personal-finance-tracker_CODE1/finance-backend/api/transactions/delete.php",
+            { data: { id } }
+          );
+          this.$emit("refresh"); // Ask parent to reload
+        } catch (err) {
+          console.error("Delete failed:", err);
+        }
+      }
+    },
+  },
 };
 </script>
 
@@ -64,5 +90,20 @@ export default {
   flex: 1;
   font-weight: 500;
   text-align: center;
+}
+.actions {
+  display: flex;
+  gap: 10px;
+}
+.delete-btn {
+  background-color: transparent;
+  border: none;
+  color: #f56c6c;
+  cursor: pointer;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+.delete-btn:hover {
+  color: #ff3b3b;
 }
 </style>
