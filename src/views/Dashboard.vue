@@ -89,7 +89,7 @@ export default {
     async fetchTransactions() {
       try {
         const res = await axios.get(
-          "http://localhost:8086/api/transactions/get.php"
+          "http://localhost:8085/personal-finance-tracker_CODE/finance-backend/api/transactions/get.php"
         );
         if (res.data.success) {
           this.transactions = res.data.data;

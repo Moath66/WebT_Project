@@ -34,10 +34,8 @@ export default {
       if (confirm("Are you sure you want to delete this transaction?")) {
         try {
           await axios.delete(
-            "http://localhost:8086/api/transactions/delete.php",
-            {
-              data: { id },
-            }
+            "http://localhost:8085/personal-finance-tracker_CODE/finance-backend/api/transactions/delete.php",
+            { data: { id } }
           );
           this.$emit("refresh"); // Ask parent to reload
         } catch (err) {

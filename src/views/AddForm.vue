@@ -60,7 +60,7 @@ export default {
     async handleSubmit() {
       try {
         await axios.post(
-          "http://localhost:8086/api/transactions/post.php",
+          "http://localhost:8085/personal-finance-tracker_CODE/finance-backend/api/transactions/post.php",
           this.form
         );
         alert("✅ Transaction added successfully!");
