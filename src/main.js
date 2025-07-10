@@ -2,13 +2,14 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 
-// 🔥 Import Toastification
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 
-const app = createApp(App);
+// ✅ GLOBAL axios setup
+import axios from "axios";
+axios.defaults.headers.post["Content-Type"] = "application/json";
 
-// ✅ Use toast globally
+const app = createApp(App);
 app.use(Toast);
 app.use(router);
 app.mount("#app");

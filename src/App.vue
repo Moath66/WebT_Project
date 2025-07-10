@@ -6,7 +6,7 @@
 
       <router-link to="/" class="nav-btn"> 📊 Dashboard </router-link>
 
-      <router-link to="/update" class="nav-btn purple">
+      <router-link to="/add" class="nav-btn purple">
         ➕ Add Transaction
       </router-link>
 
@@ -23,12 +23,22 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   methods: {
-    clearTransactions() {
+    async clearTransactions() {
       if (confirm("Are you sure you want to clear all transactions?")) {
-        localStorage.removeItem("transactions");
-        location.reload();
+        try {
+          await axios.delete(
+            "http://localhost:8085/personal-finance-tracker_CODE1/finance-backend/api/transactions/delete_all.php"
+          );
+          alert("✅ All transactions cleared!");
+          location.reload(); // Or emit an event to refresh only
+        } catch (error) {
+          console.error("Clear All Error:", error);
+          alert("❌ Failed to clear transactions.");
+        }
       }
     },
   },

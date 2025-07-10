@@ -1,7 +1,6 @@
-<!-- Contributed by Mustafa Qazi: Built the update transaction form and handled validation -->
 <template>
   <div class="form-container">
-    <h2>✏️ Update Transaction</h2>
+    <h2>➕ Add New Transaction</h2>
     <form @submit.prevent="handleSubmit">
       <label for="type">Type:</label>
       <select id="type" v-model="form.type" required>
@@ -34,7 +33,7 @@
       ></textarea>
 
       <div class="buttons">
-        <button type="submit">💾 Save Changes</button>
+        <button type="submit">✅ Add Transaction</button>
         <router-link to="/" class="cancel-btn">❌ Cancel</router-link>
       </div>
     </form>
@@ -45,11 +44,10 @@
 import axios from "axios";
 
 export default {
-  name: "UpdateForm",
+  name: "AddForm",
   data() {
     return {
       form: {
-        id: null,
         type: "",
         amount: 0,
         category: "",
@@ -58,38 +56,18 @@ export default {
       },
     };
   },
-  created() {
-    this.loadTransaction();
-  },
   methods: {
-    async loadTransaction() {
-      const id = this.$route.params.id;
-      try {
-        const response = await axios.get(
-          "http://localhost:8085/personal-finance-tracker_CODE1/finance-backend/api/transactions/get.php"
-        );
-        const transaction = response.data.data.find((t) => t.id == id);
-        if (transaction) {
-          this.form = { ...transaction };
-        } else {
-          alert("Transaction not found.");
-          this.$router.push("/");
-        }
-      } catch (error) {
-        console.error("Failed to load transaction:", error);
-      }
-    },
     async handleSubmit() {
       try {
-        await axios.put(
-          "http://localhost:8085/personal-finance-tracker_CODE1/finance-backend/api/transactions/put.php",
+        await axios.post(
+          "http://localhost:8085/personal-finance-tracker_CODE1/finance-backend/api/transactions/post.php",
           this.form
         );
-        alert("✅ Transaction updated successfully!");
+        alert("✅ Transaction added successfully!");
         this.$router.push("/");
       } catch (error) {
-        console.error("Update failed:", error);
-        alert("❌ Failed to update transaction.");
+        console.error("Failed to add transaction:", error);
+        alert("❌ Error: Could not add transaction.");
       }
     },
   },

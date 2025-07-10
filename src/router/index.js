@@ -8,9 +8,15 @@ const routes = [
     component: Dashboard,
   },
   {
-    path: "/update",
+    path: "/add",
+    name: "AddForm",
+    component: () => import("../views/AddForm.vue"),
+  },
+  {
+    path: "/update/:id",
     name: "UpdateForm",
     component: () => import("../views/UpdateForm.vue"),
+    props: true,
   },
 ];
 
