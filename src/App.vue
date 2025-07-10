@@ -31,7 +31,8 @@ export default {
       if (confirm("Are you sure you want to clear all transactions?")) {
         try {
           await axios.delete(
-            "http://localhost:8085/personal-finance-tracker_CODE1/finance-backend/api/transactions/delete_all.php"
+            "http://localhost:8081/personal-finance-tracker_CODE\finance-backend\api\transactions/delete_all.php"
+            
           );
           alert("✅ All transactions cleared!");
           location.reload(); // Or emit an event to refresh only
