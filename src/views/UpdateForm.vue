@@ -66,7 +66,7 @@ export default {
       const id = this.$route.params.id;
       try {
         const response = await axios.get(
-          "http://localhost:8085/transactions/get.php"
+          "http://localhost:8086/api/transactions/get.php"
         );
         const transaction = response.data.data.find((t) => t.id == id);
         if (transaction) {
@@ -82,7 +82,7 @@ export default {
     async handleSubmit() {
       try {
         await axios.put(
-          "http://localhost:8085/transactions/put.php",
+          "http://localhost:8086/api/transactions/put.php",
           this.form
         );
         alert("✅ Transaction updated successfully!");

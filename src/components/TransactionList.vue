@@ -33,9 +33,12 @@ export default {
     async deleteTransaction(id) {
       if (confirm("Are you sure you want to delete this transaction?")) {
         try {
-          await axios.delete("http://localhost:8085/transactions/delete.php", {
-            data: { id },
-          });
+          await axios.delete(
+            "http://localhost:8086/api/transactions/delete.php",
+            {
+              data: { id },
+            }
+          );
           this.$emit("refresh"); // Ask parent to reload
         } catch (err) {
           console.error("Delete failed:", err);

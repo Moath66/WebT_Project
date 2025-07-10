@@ -31,7 +31,7 @@ export default {
       if (confirm("Are you sure you want to clear all transactions?")) {
         try {
           await axios.delete(
-            "http://localhost:8085/transactions/delete_all.php"
+            "http://localhost:8086/api/transactions/delete_all.php"
           );
           alert("✅ All transactions cleared!");
           location.reload(); // Or emit an event to refresh only
